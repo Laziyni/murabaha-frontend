@@ -1,0 +1,21 @@
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0.75rem;
+}
+.col3 {
+  grid-column: span 3;
+}
+.col4 {
+  grid-column: span 4;
+}
+.col6 {
+  grid-column: span 6;
+}
+.col12 {
+  grid-column: span 12;
+}
+.section {
+  margin: 1rem 0 0.5rem;
+  font-weight: 700;
+}

@@ -1,0 +1,41 @@
+:root {
+  --bg: #f6f7f9;
+  --text: #101114;
+  --muted: #6b7280;
+  --brand: #0ea5a3;
+  --card: #ffffff;
+  --border: #e5e7eb;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    'Inter',
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
+  color: var(--text);
+  background: var(--bg);
+}
+button {
+  cursor: pointer;
+}
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+}

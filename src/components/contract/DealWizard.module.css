@@ -1,0 +1,14 @@
+.wizard {
+  display: grid;
+  gap: 0.75rem;
+}
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}

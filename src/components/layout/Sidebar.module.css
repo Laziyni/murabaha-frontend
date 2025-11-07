@@ -1,0 +1,39 @@
+.shell {
+  display: grid;
+  grid-template-columns: 16rem 1fr;
+  height: 100%;
+}
+.sidebar {
+  background: #fff;
+  border-right: 1px solid var(--border);
+  padding: 1rem;
+}
+.brand {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.nav {
+  display: grid;
+  gap: 0.25rem;
+}
+.link {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.6rem;
+  color: #1f2937;
+  text-decoration: none;
+}
+.active {
+  composes: link;
+  background: #ecfeff;
+  color: #0e7490;
+  font-weight: 700;
+}
+.content {
+  display: grid;
+  grid-template-rows: 3.5rem 1fr;
+}
+.main {
+  padding: 1rem;
+  overflow: auto;
+}

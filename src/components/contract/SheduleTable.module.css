@@ -1,0 +1,9 @@
+.totals {
+  display: flex;
+  gap: 1rem;
+  font-weight: 700;
+}
+.note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
