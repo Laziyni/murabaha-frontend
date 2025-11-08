@@ -50,14 +50,12 @@ export default function DocumentPreview({ draft }: { draft: DealDraft }) {
 
       <div className={s.line}>
         Поручитель отвечает солидарно с Покупателем:{' '}
-        <b>{draft.guarantor?.fullName || '—'}</b>, паспорт: серия{' '}
+        <b>{draft.guarantor?.fullName || '—'}</b>, дата рождения:{' '}
+        {draft.guarantor?.birthDate || '—'}, паспорт: серия{' '}
         {draft.guarantor?.passportSeries || '____'} №{' '}
         {draft.guarantor?.passportNumber || '______'}, телефон:{' '}
-        {draft.guarantor?.phone || '—'}.
-      </div>
-
-      <div className={s.print}>
-        <Button onClick={print}>Печать</Button>
+        {draft.guarantor?.phone || '—'}, адрес:{' '}
+        {draft.guarantor?.address || '—'}.
       </div>
 
       <div className={s.signs}>
@@ -66,6 +64,9 @@ export default function DocumentPreview({ draft }: { draft: DealDraft }) {
         <div>
           Поручитель: _______________ / {draft.guarantor?.fullName || '—'}
         </div>
+      </div>
+      <div className={s.print}>
+        <Button onClick={print}>Печать</Button>
       </div>
     </div>
   );

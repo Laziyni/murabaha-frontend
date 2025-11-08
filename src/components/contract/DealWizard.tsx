@@ -32,9 +32,11 @@ export default function DealWizard() {
   });
   const [guarantor, setGuarantor] = useState({
     fullName: '',
+    birthDate: '',
     phone: '',
     passportSeries: '',
     passportNumber: '',
+    address: '',
   });
   const [seller] = useState({ fullName: 'ИП/ООО «Ваше юр. лицо»' });
   const [product, setProduct] = useState({ title: '', cashPrice: 0 });
@@ -155,6 +157,16 @@ export default function DealWizard() {
           </Col6>
           <Col3>
             <Input
+              type="date"
+              label="Дата рождения"
+              value={guarantor.birthDate}
+              onChange={(e) =>
+                setGuarantor({ ...guarantor, birthDate: e.target.value })
+              }
+            />
+          </Col3>
+          <Col3>
+            <Input
               label="Телефон"
               value={guarantor.phone}
               onChange={(e) =>
@@ -180,6 +192,15 @@ export default function DealWizard() {
               }
             />
           </Col3>
+          <Col6>
+            <Input
+              label="Адрес проживания"
+              value={guarantor.address}
+              onChange={(e) =>
+                setGuarantor({ ...guarantor, address: e.target.value })
+              }
+            />
+          </Col6>
         </Row>
       </Card>
 
