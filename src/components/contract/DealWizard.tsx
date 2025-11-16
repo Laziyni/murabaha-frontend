@@ -14,6 +14,8 @@ import {
 import { buildSchedule } from '@/utils/schedule';
 import { rub } from '@/utils/money';
 import { DealDraft } from '@/types/contract';
+import { useSaveDealDraftMutation } from '@/hooks/api/useSaveDealDraftMutation';
+import { getApiErrorMessage } from '@/lib/http-client';
 // import ScheduleTable from './ScheduleTable';
 import DocumentPreview from './DocumentPreview';
 // import ConsentPreview from './ConsentPreview';
@@ -22,6 +24,7 @@ import ScheduleTable from './SheduleTable';
 import ConsentPreview from './ConsertPreview';
 
 export default function DealWizard() {
+  const saveDealDraft = useSaveDealDraftMutation();
   const [buyer, setBuyer] = useState({
     fullName: '',
     birthDate: '',
@@ -82,10 +85,13 @@ export default function DealWizard() {
     [buyer, guarantor, seller, product, terms, schedule]
   );
 
-  const save = () => {
-    // тут вызов Api.saveDealDraft(draft) — подключите бэк при готовности
-    console.log('DEAL_DRAFT', draft);
-    alert('Черновик сделки сохранён в консоли. Подключите Api.saveDealDraft.');
+  const save = async () => {
+    try {
+      await saveDealDraft.mutateAsync(draft);
+      alert('Черновик сделки сохранён на сервере.');
+    } catch (error) {
+      alert(`Ошибка при сохранении: ${getApiErrorMessage(error)}`);
+    }
   };
 
   return (
@@ -302,8 +308,12 @@ export default function DealWizard() {
       </div>
 
       <div className={s.actions}>
-        <Button onClick={save} variant="primary">
-          Сохранить черновик
+        <Button
+          onClick={save}
+          variant="primary"
+          disabled={saveDealDraft.isPending}
+        >
+          {saveDealDraft.isPending ? 'Сохраняем...' : 'Сохранить черновик'}
         </Button>
         <Button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           К началу

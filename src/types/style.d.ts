@@ -9,5 +9,5 @@ declare module '*.module.scss' {
   export default classes;
 }
 
-declare module '*.css';    // на случай глобальных .css импортов
+declare module '*.css'; // на случай глобальных .css импортов
 declare module '*.scss';

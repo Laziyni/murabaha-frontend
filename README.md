@@ -40,15 +40,15 @@ export default defineConfig([
       // other options...
     },
   },
-])
+]);
 ```
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -69,5 +69,32 @@ export default defineConfig([
       // other options...
     },
   },
-])
+]);
 ```
+
+## Backend & data fetching
+
+The project now ships with a minimal but structured API layer that allows the React UI to talk to the backend (`http://94.241.139.204:3000` by default).
+
+- Configure the base URL inside your `.env` (see `.env.example`).
+- `src/lib/http-client.ts` contains a shared Axios instance plus helpers for surfacing API errors.
+- Each domain gets its own service: `src/services/auth.ts`, `clients.ts`, `deals.ts` etc. They encapsulate endpoint URLs and types.
+- Hooks under `src/hooks/api/*` wrap TanStack Query’s `useQuery` / `useMutation` so components can stay declarative.
+- `src/lib/react-query.ts` exports a configured `QueryClient` which is provided in `src/main.tsx`.
+
+Example login mutation:
+
+```tsx
+import { useLoginMutation } from '@/hooks/api/useLoginMutation';
+
+const login = useLoginMutation();
+login.mutate({ username: 'demo', password: 'secret' });
+```
+
+Example clients query (see `src/components/pages/ClientsPage.tsx`):
+
+```tsx
+const { data, isLoading, isError, error } = useClientsQuery();
+```
+
+Add new endpoints by creating a function in `src/services`, exporting the matching hook from `src/hooks/api`, and using that hook in the page or component that needs the data.
